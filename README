@@ -1,0 +1,20 @@
+DESCRIPTION:
+
+These are completion scripts for rake and cap. They do a minimal setup and then use the same common script. They sport file-caching in .rake_completion and .cap_completion respectivly and automatically expire the cache all 24 hours.
+
+INSTALLATION:
+
+Make a folder named ~/.bash_completion.ruby.d:
+
+  cd
+  mkdir .bash_completion.ruby.d
+
+Clone the git repo to this folder:
+
+  cd .bash_completion.ruby.d
+  git clone git@github.com:niko/rake_and_cap_completion.git
+
+Add these lines to your ~/.bashrc or ~/.profile:
+
+  complete -C ~/.bash_completion.ruby.d/rake_and_cap_completion/rake-complete.rb -o default rake
+  complete -C ~/.bash_completion.ruby.d/rake_and_cap_completion/cap-complete.rb -o default cap
