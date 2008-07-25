@@ -1,6 +1,6 @@
 DESCRIPTION:
 
-These are completion scripts for rake and cap. They do a minimal setup and then use the same common script. They sport file-caching in .rake_completion and .cap_completion respectivly and automatically expire the cache all 24 hours.
+This is completion scripts for rake and cap. It sports file-caching in .rake_completion and .cap_completion respectivly and automatically expire the cache all 24 hours.
 
 INSTALLATION:
 
