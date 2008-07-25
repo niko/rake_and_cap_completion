@@ -16,5 +16,5 @@ Clone the git repo to this folder:
 
 Add these lines to your ~/.bashrc or ~/.profile:
 
-  complete -C ~/.bash_completion.ruby.d/rake_and_cap_completion/rake-complete.rb -o default rake
-  complete -C ~/.bash_completion.ruby.d/rake_and_cap_completion/cap-complete.rb -o default cap
+  complete -C ~/.bash_completion.ruby.d/rake_and_cap_completion/rake_and_cap_completion.rb -o default rake
+  complete -C ~/.bash_completion.ruby.d/rake_and_cap_completion/rake_and_cap_completion.rb -o default cap

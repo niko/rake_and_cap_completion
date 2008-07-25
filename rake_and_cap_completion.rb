@@ -1,12 +1,21 @@
-# This is the common code for rake and cap command completion.
+#!/usr/bin/env ruby
 
 require 'fileutils'
 
-# We exit, if the FILEDEPENDENCIES aren't met:
-exit 0 unless FILEDEPENDENCIES.any? { |file_deps| File.file?(File.join(Dir.pwd, file_deps)) }
+case ENV["COMP_LINE"]
+when /\Arake\s+(.*)/
+  COMMAND = 'rake'
+  filedependencies = ['rakefile', 'Rakefile', 'rakefile.rb', 'Rakefile.rb']
+when /\Acap\s+(.*)/
+  COMMAND = 'cap'
+  filedependencies = ['config/deploy.rb']
+else
+  exit 0
+end
 
-# We also exit, if we don't like the command:
-exit 0 unless /\A#{COMMAND}\s+(.*)/ =~ ENV["COMP_LINE"]
+# We exit, if the FILEDEPENDENCIES aren't met:
+exit 0 unless filedependencies.any? { |file_deps| File.file?(File.join(Dir.pwd, file_deps)) }
+
 task_to_complete = $1
 
 # We define cache-directory, based on the name of the command (cap or rake).
@@ -28,10 +37,10 @@ end
 # We return the tasks, one in a line.
 #
 def all_tasks
-  if File.exists?(cache_file) & (Time.now - File.ctime(cache_file) < 60 * 60 * 24)
+  if File.exists?(cache_file) && (Time.now - File.ctime(cache_file) < 60 * 60 * 24)
     tasks = File.read(cache_file)
   else
-    tasks = `cap -T | grep "^#{COMMAND}" | cut -d " " -f 2`
+    tasks = `#{COMMAND} -T | grep "^#{COMMAND}" | cut -d " " -f 2`
     File.open(cache_file, 'w') { |f| f.puts tasks }
   end
   
